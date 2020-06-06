@@ -10,16 +10,17 @@ on:
         branches: [ master ]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
+ build:
+   runs-on: ubuntu-latest
+       
+   steps:
+   - uses: actions/checkout@v2
 
-    - name: Use docker-compose
-      run: docker-compose up
+   - name: Use docker-compose
+     run: docker-compose up
 
-    - name: Checking the running containers
-      run: docker ps -a 
-    
-    - name: Run test
-      run: docker exec node_backend npm test
+   - name: Checking the running containers
+     run: docker ps -a 
+
+   - name: Run test
+     run: docker exec node_backend npm test
