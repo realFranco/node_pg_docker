@@ -45,9 +45,11 @@ car.get('/', async (req, res) => {
         }, {transaction : t})
         .then( data =>{
 
-            let message = (!data || !data.count) 
+            let message = (!data || data.count == 0) 
                 ? "object not found"
                 : "object found";
+
+            console.log(data)
 
             t.commit();    
 
@@ -57,7 +59,7 @@ car.get('/', async (req, res) => {
                     result      : "ok",
                     http_code   : 200,
                     message,
-                    item        : data
+                    item        : data.rows
                 });
         });
     }else{
@@ -79,9 +81,9 @@ car.post('/', upload.multer.none(), async (req, res) =>{
     console.log('post/')
     try{
         Car.create({
-            id_car : uuidv4(),
-            brand : req.body.brand,
-            model : req.body.model
+            id_car  : uuidv4(),
+            brand   : req.body.brand,
+            model   : req.body.model
         }, { transaction: t })
         .then( item => {
             t.commit();
@@ -176,7 +178,7 @@ car.post('/update', upload.multer.none(), async(req, res) => {
     });
 });
 
-// delete all | id_car
+// delete all | id_car | barnd | model
 car.delete('/', upload.multer.none(), async (req, res) =>{
     var where = {},
         t = await db.transaction();
