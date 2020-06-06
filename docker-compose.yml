@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+    node_backend:
+        build: .
+        container_name: "node_pg_docker"
+        ports:
+            - "$APP_PORT:$APP_PORT"
+
+    postgresql:
+        container_name: "postgres"
+        # env_file:
+        #     - .env
+        environment: 
+            POSTGRES_DB : $DB_DATABASE
+            POSTGRES_USER: $DB_USER
+            POSTGRES_PASSWORD: $DB_PASSWORD
+        image: "postgres:alpine"
+        ports:
+            - "$DB_PORT:$DB_PORT"
+        volumes:
+            - ./db:/docker-entrypoint-initdb.d/

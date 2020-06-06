@@ -1,0 +1,10 @@
+# Ignore
+
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+
+# If I am using Git, ignoring this files
+.git
+.gitignore
