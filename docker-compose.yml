@@ -20,7 +20,6 @@ services:
             POSTGRES_PASSWORD: $DB_PASSWORD
         image: "postgres:alpine"
         ports:
-            # - "$DB_PORT:$DB_PORT"
-            - "5431:5432"
+            - "$DB_PORT:$DB_PORT"
         volumes:
             - ./db:/docker-entrypoint-initdb.d/
